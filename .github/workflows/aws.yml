@@ -58,7 +58,7 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition:  ${{ env.ECS_TASK_DEFINITION }}
-          container-name: demo-python-app #${{ env.CONTAINER_NAME }}
+          container-name: ${{ env.ECR_REPOSITORY_NAME }}
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
