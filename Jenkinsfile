@@ -49,18 +49,19 @@ pipeline{
 } catch(Exception e) {
   echo e.message.toString()
 }
-//----------------------------------------------------------------------------------------------------------------------------------------------------------    try {// If you are using CodeDeploy for blue green deployment
-  withAWS(region: 'ap-southeast-1', credentials: 'awsId') {
-    sh(returnStdout: true, script: "aws s3 cp appspec.yml s3://<your-s3-bucket-name>/appspec.yml")
-    def deploy = sh(returnStdout: true, script: "aws deploy create-deployment \
-    --application-name <application-name> \
-    --deployment-group-name <deployment-group-name> \
-    --s3-location bucket=<your-s3-bucket-name>,bundleType=yaml,key=appspec.yml")
-    def deployJson = readJSON text: deploy, returnPojo: true
-    def waitDeploy = "aws deploy wait deployment-successful --deployment-id ${deployJson['deploymentId']}"
-    sh(returnStdout: true, script: waitDeploy)
+//----------------------------------------------------------------------------------------------------------------------------------------------------------    
+    try {// If you are using CodeDeploy for blue green deployment
+        withAWS(region: 'ap-southeast-1', credentials: 'awsId') {
+            sh(returnStdout: true, script: "aws s3 cp appspec.yml s3://<your-s3-bucket-name>/appspec.yml")
+            def deploy = sh(returnStdout: true, script: "aws deploy create-deployment \
+            --application-name <application-name> \
+            --deployment-group-name <deployment-group-name> \
+            --s3-location bucket=<your-s3-bucket-name>,bundleType=yaml,key=appspec.yml")
+            def deployJson = readJSON text: deploy, returnPojo: true
+            def waitDeploy = "aws deploy wait deployment-successful --deployment-id ${deployJson['deploymentId']}"
+            sh(returnStdout: true, script: waitDeploy)
     // your slack message here to alert you deployment is done
-    sh(returnStdout: true, script: "aws s3 rm s3://<your-s3-bucket-name>/appspec.yml")
+            sh(returnStdout: true, script: "aws s3 rm s3://<your-s3-bucket-name>/appspec.yml")
   }
  catch(Exception e) {
   echo e.toString()
