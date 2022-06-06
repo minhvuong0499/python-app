@@ -1,5 +1,4 @@
 name: Deploy to Amazon ECS
-
 on:
   push:
     branches:
@@ -58,7 +57,7 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition:  aws-task-definition.json
-          container-name: ${{ env.ECR_REPOSITORY }}
+          container-name: containter-from-git-aciton
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
