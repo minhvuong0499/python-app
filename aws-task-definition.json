@@ -56,7 +56,7 @@
     "EXTERNAL",
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:250315610593:task-definition/demo-python-app:1",
+  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:250315610593:task-definition/demo-python-app:2",
   "family": "demo-python-app",
   "requiresAttributes": [
     {
@@ -73,7 +73,7 @@
   "networkMode": "bridge",
   "runtimePlatform": null,
   "cpu": null,
-  "revision": 1,
+  "revision": 2,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
