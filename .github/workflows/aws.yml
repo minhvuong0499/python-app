@@ -9,7 +9,7 @@ env:
   ECR_REPOSITORY:  demo-python-app          # set this to your Amazon ECR repository name
   ECS_SERVICE: service-python-app                 # set this to your Amazon ECS service name
   ECS_CLUSTER: cluster-python-app                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: demo-python-app # set this to the path to your Amazon ECS task definition                                              # file, e.g. .aws/task-definition.json
+  # ECS_TASK_DEFINITION: demo-python-app # set this to the path to your Amazon ECS task definition                                              # file, e.g. .aws/task-definition.json
   #CONTAINER_NAME: git-python-app           # set this to the name of the container in the
                                               # containerDefinitions section of your task definition
 
@@ -57,7 +57,7 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition:  aws-task-definition.json
-          container-name: containter-python-app
+          container-name: python-app-1
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
